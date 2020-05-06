@@ -6,6 +6,7 @@ class HomePage extends StatelessWidget {
     return Scaffold(
       body: Container(
         color: Colors.red,
+        child: Text("Hola harry"),
       ),
     );
   }

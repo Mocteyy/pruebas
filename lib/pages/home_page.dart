@@ -12,6 +12,7 @@ class HomePage extends StatelessWidget {
 
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
+    photosProvider.getCuratedPhotos();
 
     return Scaffold(
       backgroundColor: ColorValues.backgroudColor,
@@ -111,13 +112,20 @@ class HomePage extends StatelessWidget {
   }
 
   _buildCardSwiper() {
-    return FutureBuilder(
-      future: photosProvider.getCuratedPhotos(),
+    return StreamBuilder(
+      stream: photosProvider.popularPhotosStream,
       builder: (BuildContext context , AsyncSnapshot<List<Photo>> snapshot){
        if(snapshot.hasData){
-        return CardSwiper(photos: snapshot.data);
+        return CardSwiper(
+          photos: snapshot.data,
+          callNextPage: photosProvider.getCuratedPhotos,
+        );
        }else
-       return Center(child: CircularProgressIndicator());
+       return Center(
+        child: Padding(
+          padding: const EdgeInsets.all(60.0),
+          child: CircularProgressIndicator(),
+        ));
       },
     );
   }

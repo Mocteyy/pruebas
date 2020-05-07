@@ -5,35 +5,42 @@ import 'package:prueba_git/util/color_values.dart';
 
 class CardSwiper extends StatelessWidget {
   final List<Photo> photos ;
+  final VoidCallback callNextPage;
+  final _pageController = new PageController(
+    initialPage: 1,
+    viewportFraction: 0.6,
+  );
 
-   CardSwiper({@required this.photos});
+   CardSwiper({@required this.photos,@required this.callNextPage});
 
   @override
   Widget build(BuildContext context) {
 
     double height = MediaQuery.of(context).size.height;
     double width = MediaQuery.of(context).size.width;
+    _pageController.addListener(() { 
+      if(_pageController.position.pixels >= _pageController.position.maxScrollExtent - 100.0){
+        callNextPage();
+      }
+    });
 
     return Container(
       height:  height * 0.50,
-      child: PageView(
+      child: PageView.builder(
+        itemCount: photos.length,
         pageSnapping: false,
-        controller: PageController(
-          initialPage: 1,
-          viewportFraction: 0.6,
-        ) ,
-        children: _getCards(height , width)
+        controller: _pageController,
+        itemBuilder: (context, index){
+          return CustomCard(
+          photo: photos[index],
+          );
+        },
+        
       ),
     );
   }
 
-  List <Widget>_getCards(double height , double width){
-    return photos.map((photo){
-      return CustomCard(
-        photo: photo,
-      );
-    }).toList();
-  }
+ 
 }
 
 class CustomCard extends StatelessWidget {

@@ -39,8 +39,8 @@ class ViewWallpaper extends StatelessWidget {
       padding:  EdgeInsets.only(left: ancho* 0.05),
       child: Row(
         
-        mainAxisAlignment: MainAxisAlignment.spaceEvenly,
-        mainAxisSize: MainAxisSize.max,
+        mainAxisAlignment: MainAxisAlignment.start,
+        mainAxisSize: MainAxisSize.min,
         children: <Widget>[
           customFloatingButton(
             radius: 30,

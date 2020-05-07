@@ -53,7 +53,6 @@ class CustomCard extends StatelessWidget {
               MaterialPageRoute(builder: (context) => ViewWallpaper(
               photo: photo,
         )));
-
       },
          child: Column(
         children: <Widget>[

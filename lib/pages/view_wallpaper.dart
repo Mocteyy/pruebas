@@ -79,7 +79,7 @@ class ViewWallpaper extends StatelessWidget {
             crossAxisAlignment: CrossAxisAlignment.center,
             children: <Widget>[
               Container(
-                child: Text('${photo.photographer}',style: TextStyle(fontWeight: FontWeight.bold, fontSize: ancho/21)),
+                child: Text('${photo.photographer}',style: TextStyle(fontWeight: FontWeight.bold, fontSize: ancho/27)),
                 padding: EdgeInsets.only( top: largo/25),
               ),
             
@@ -89,7 +89,7 @@ class ViewWallpaper extends StatelessWidget {
                   color: Colors.blue[50],
                 ),
                 child: Center(
-                  child: Text('32.4k Downloads',style: TextStyle( fontSize: ancho/30, fontWeight: FontWeight.bold))
+                  child: Text('32.4k Downloads',style: TextStyle( fontSize: ancho/45, fontWeight: FontWeight.bold))
                 ),
                 margin: EdgeInsets.only( top: largo/25),
                 padding: EdgeInsets.symmetric(horizontal: ancho/30, vertical: largo/170),

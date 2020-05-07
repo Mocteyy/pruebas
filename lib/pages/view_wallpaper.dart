@@ -105,7 +105,6 @@ class ViewWallpaper extends StatelessWidget {
     );
   }
 
-
   Widget _imagenBoton(Size _pantalla){ // Fondo de la pantalla, muestra el botón de atrás al igual que la foto.
 
     final ancho = _pantalla.width;

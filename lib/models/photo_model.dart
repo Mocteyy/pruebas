@@ -1,4 +1,22 @@
 
+class Photos{
+
+  List<Photo> items = new List();
+  Photos();
+
+  Photos.fromJsonList( List<dynamic> jsonList){
+    
+    if(jsonList == null) return;
+
+    for (var item in jsonList) {
+      final Photo photo = new Photo.fromJsonMap(item);
+      items.add(photo);
+    }
+  }
+
+}
+
+
 class Photo {
   int id;
   int width;
@@ -48,7 +66,7 @@ class Src {
     this.landscape,
   });
 
-  Src.fromJson(Map<String, String> src){
+  Src.fromJson(Map<String, dynamic> src){
     original    =   src['original'];
     large       =   src['large'];
     medium      =   src['medium'];

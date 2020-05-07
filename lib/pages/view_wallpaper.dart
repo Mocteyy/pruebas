@@ -38,7 +38,6 @@ class ViewWallpaper extends StatelessWidget {
     return Padding(
       padding:  EdgeInsets.only(left: ancho* 0.08),
       child: Row(
-        
         mainAxisAlignment: MainAxisAlignment.spaceBetween,
         mainAxisSize: MainAxisSize.max,
         children: <Widget>[
@@ -55,7 +54,10 @@ class ViewWallpaper extends StatelessWidget {
               borderRadius: BorderRadius.circular(15)
             ),
             padding: EdgeInsets.symmetric(horizontal: ancho/30, vertical: largo/60),
-            child: Text('Apply Wallpaper', style: TextStyle(fontSize: ancho/20, color: Colors.white)),
+            child: Text('Apply Wallpaper', style: TextStyle(fontSize: ancho/20, color: Colors.white),
+            overflow: TextOverflow.fade,
+            
+            ),
             color: Color.fromRGBO(75, 66, 255, 1),
             onPressed: (){},
           )

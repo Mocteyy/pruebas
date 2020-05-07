@@ -59,9 +59,7 @@ class CustomCard extends StatelessWidget {
           SizedBox(
             height: height * 0.05,
           ),
-          Hero(
-            tag: photo.id,
-            child: Container(
+           Container(
               height: height * 0.35,
               width: width * 0.50,
              padding: EdgeInsets.all(height *0.015),
@@ -85,16 +83,19 @@ class CustomCard extends StatelessWidget {
                 mainAxisSize: MainAxisSize.min,
                 children: <Widget>[
                    Expanded(
-                     child: Container(
-                       decoration: BoxDecoration(
-                         borderRadius: BorderRadius.circular(15),
-                         image: DecorationImage(
-                           image: NetworkImage(photo.src.medium),
-                           fit: BoxFit.cover
-                         )
-                       ),
-                        width: double.infinity,
-                      ),
+                     child: Hero(
+                       tag: photo.id,
+                       child: Container(
+                         decoration: BoxDecoration(
+                           borderRadius: BorderRadius.circular(15),
+                           image: DecorationImage(
+                             image: NetworkImage(photo.src.medium),
+                             fit: BoxFit.cover
+                           )
+                         ),
+                          width: double.infinity,
+                        ),
+                     ),
                    ),
                   Padding(
                     padding: const EdgeInsets.only(top: 10.0),
@@ -110,7 +111,6 @@ class CustomCard extends StatelessWidget {
                 ],
               )
             ),
-          ),
           SizedBox(
             height: height * 0.10,
           )

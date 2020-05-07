@@ -1,7 +1,11 @@
 import 'package:flutter/material.dart';
-import 'package:flutter/services.dart'; 
+import 'package:flutter/services.dart';
+import 'package:prueba_git/models/photo_model.dart'; 
 
 class ViewWallpaper extends StatelessWidget {
+  final Photo photo ;
+   ViewWallpaper({ this.photo}) ;
+
   @override
   Widget build(BuildContext context) {
 
@@ -15,7 +19,7 @@ class ViewWallpaper extends StatelessWidget {
     return Scaffold(
       body: Column(
         children: <Widget>[
-          _imagenBoton(_pantalla),
+          _imagenBoton(_pantalla, context),
           _parteInferior(_pantalla),
         ],
       ),
@@ -35,6 +39,7 @@ class ViewWallpaper extends StatelessWidget {
         Container(
           margin: EdgeInsets.only(left: ancho/13),
           child: FloatingActionButton(
+            heroTag: 'favorite',
             backgroundColor: Colors.white,
             child: Icon(Icons.favorite, color: Color.fromRGBO(75, 66, 255, 1),size: 39,),
             onPressed: (){},
@@ -42,6 +47,7 @@ class ViewWallpaper extends StatelessWidget {
         ),
         SizedBox(width: ancho/15,),
         FloatingActionButton(
+          heroTag: 'download',
           backgroundColor: Colors.white,
           child: Icon(Icons.arrow_downward, color: Color.fromRGBO(75, 66, 255, 1),size: 39,),
           onPressed: () {},
@@ -51,7 +57,7 @@ class ViewWallpaper extends StatelessWidget {
           shape: RoundedRectangleBorder(
             borderRadius: BorderRadius.circular(15)
           ),
-          padding: EdgeInsets.symmetric(horizontal: ancho/15, vertical: largo/60),
+          padding: EdgeInsets.symmetric(horizontal: ancho/30, vertical: largo/60),
           child: Text('Apply Wallpaper', style: TextStyle(fontSize: ancho/20, color: Colors.white)),
           color: Color.fromRGBO(75, 66, 255, 1),
           onPressed: (){},
@@ -65,58 +71,51 @@ class ViewWallpaper extends StatelessWidget {
     final ancho = _pantalla.width;
     final largo = _pantalla.height;
 
-    return Column(
-      children: <Widget>[
-        Row(
-          //mainAxisAlignment: MainAxisAlignment.spaceBetween,
-          children: <Widget>[
-            Card(
-              elevation: 9,
-              shape: RoundedRectangleBorder(
-                borderRadius: BorderRadius.circular(25)
+    return 
+        Padding(
+          padding:  EdgeInsets.symmetric(horizontal: ancho/17,),
+          child: Row(
+            mainAxisAlignment: MainAxisAlignment.spaceBetween,
+            crossAxisAlignment: CrossAxisAlignment.center,
+            children: <Widget>[
+              Container(
+                child: Text('${photo.photographer}',style: TextStyle(fontWeight: FontWeight.bold, fontSize: ancho/21)),
+                padding: EdgeInsets.only( top: largo/25),
               ),
-              margin: EdgeInsets.only(left: ancho/25, top: largo/30),
-              child: CircleAvatar(
-                maxRadius: ancho/14,
-                backgroundImage: AssetImage('assets/girl.png'),
-              ),
-            ),
-            Container(
-              child: Text('Helsinki',style: TextStyle(fontWeight: FontWeight.bold, fontSize: ancho/21)),
-              padding: EdgeInsets.only(left:  ancho/17, top: largo/25),
-            ),
-            SizedBox(width: ancho/4.5,)
-            ,
-            Container(
-              decoration: BoxDecoration(
-                borderRadius: BorderRadius.circular(25),
-                color: Colors.blue[50],
-              ),
-              
-              child: Center(
-                child: Text('32.4k Downloads',style: TextStyle( fontSize: ancho/30, fontWeight: FontWeight.bold))
-              ),
-              margin: EdgeInsets.only( top: largo/25),
-              padding: EdgeInsets.symmetric(horizontal: ancho/30, vertical: largo/170),
-            )
-          ],
-        )
-      ],
-    );
+            
+              Container(
+                decoration: BoxDecoration(
+                  borderRadius: BorderRadius.circular(25),
+                  color: Colors.blue[50],
+                ),
+                child: Center(
+                  child: Text('32.4k Downloads',style: TextStyle( fontSize: ancho/30, fontWeight: FontWeight.bold))
+                ),
+                margin: EdgeInsets.only( top: largo/25),
+                padding: EdgeInsets.symmetric(horizontal: ancho/30, vertical: largo/170),
+              )
+            ],
+          ),
+        );
+      
+    
   }
 
 
-  Widget _imagenBoton(Size _pantalla){ // Fondo de la pantalla, muestra el botón de atrás al igual que la foto.
+  Widget _imagenBoton(Size _pantalla , context){ // Fondo de la pantalla, muestra el botón de atrás al igual que la foto.
 
     final ancho = _pantalla.width;
     final largo = _pantalla.height;
 
     return Stack(
       children: <Widget>[
-        Image.network('https://assets.wallpapersin4k.org/uploads/2017/04/Mobile-Wallpaper-Landscape-2.jpg', 
-          fit: BoxFit.cover, 
-          width: double.infinity,
-          height: largo/1.3,
+        Hero(
+          tag: photo.id,
+          child: Image.network(photo.src.large, 
+            fit: BoxFit.cover, 
+            width: double.infinity,
+            height: largo/1.3,
+          ),
         ),
         SafeArea(
           child: Card(
@@ -127,7 +126,9 @@ class ViewWallpaper extends StatelessWidget {
             elevation: 10,
             child: IconButton(
               icon: Icon(Icons.arrow_back),
-              onPressed: (){},
+              onPressed: (){
+                Navigator.pop(context);
+              },
               iconSize: ancho/13,
             ),
           ),

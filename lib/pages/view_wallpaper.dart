@@ -36,11 +36,11 @@ class ViewWallpaper extends StatelessWidget {
     final largo = _pantalla.height;
 
     return Padding(
-      padding:  EdgeInsets.only(left: ancho* 0.05),
+      padding:  EdgeInsets.only(left: ancho* 0.08),
       child: Row(
         
-        mainAxisAlignment: MainAxisAlignment.start,
-        mainAxisSize: MainAxisSize.min,
+        mainAxisAlignment: MainAxisAlignment.spaceBetween,
+        mainAxisSize: MainAxisSize.max,
         children: <Widget>[
           customFloatingButton(
             radius: 30,
@@ -50,7 +50,6 @@ class ViewWallpaper extends StatelessWidget {
             radius: 30,
             icon: Icon(Icons.arrow_downward ,color: Color.fromRGBO(75, 66, 255, 1))
           ),
-        
           RaisedButton(
             shape: RoundedRectangleBorder(
               borderRadius: BorderRadius.circular(15)

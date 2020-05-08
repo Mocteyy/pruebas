@@ -17,7 +17,6 @@ class CardSwiper extends StatelessWidget {
   Widget build(BuildContext context) {
 
     double height = MediaQuery.of(context).size.height;
-    double width = MediaQuery.of(context).size.width;
     _pageController.addListener(() { 
       if(_pageController.position.pixels >= _pageController.position.maxScrollExtent - 100.0){
         callNextPage();

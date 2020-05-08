@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:prueba_git/pages/home_page.dart';
-import 'package:prueba_git/util/color_values.dart';
+
 
 class LoginName extends StatelessWidget {
 
